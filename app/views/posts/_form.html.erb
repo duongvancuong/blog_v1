@@ -1,0 +1,28 @@
+<%= javascript_include_tag "Ckeditor.cdn_url", "data-turbolinks-track": true %>
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+  <div class="form-group col-md-4">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  </div>
+  <div class="row">
+  <div class="form-group col-md-4">
+    <%= f.label :content %><br>
+    <%= f.cktext_area :content, class: "form-control", ckeditor: { language: 'en'} %>
+  </div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Create', class: "btn btn-primary" %>
+  </div>
+<% end %>

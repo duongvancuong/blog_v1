@@ -1,0 +1,15 @@
+<div id="content">
+  <div class="inner">
+      <article class="box post post-excerpt">
+        <%= flash_messages %>
+        <h2><%= @post.title %></h2>
+        <p>
+          <%= @post.content.html_safe %>
+        </p>
+        <% if current_user.present? && owner_post?(@post) %>
+          <%= link_to 'Edit', edit_user_post_path(@post), class: "btn btn-warning" %>
+          <%= link_to "Back", user_posts_path(current_user), class: "btn btn-default" %>
+        <% end %>
+      </article>
+  </div>
+</div>

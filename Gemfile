@@ -12,10 +12,11 @@ gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "jquery-rails"
 gem "jquery-turbolinks"
 gem "devise"
-gem "bootstrap-sass", "~> 3.3.6"
+gem 'bootstrap-sass', '~> 3.3.6'
 gem "config"
 gem "carrierwave", "0.11.2"
 gem "mini_magick", "4.5.1"
+gem 'ckeditor'
 gem "cancancan", "~> 1.10"
 gem 'rolify'
 # Use Puma as the app server

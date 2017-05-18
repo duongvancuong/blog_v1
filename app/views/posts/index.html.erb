@@ -1,0 +1,48 @@
+<div id="content">
+  <div class="inner">
+    <%= flash_messages %>
+    <h2>Post List</h2>
+    <div class="container">
+      <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+        <thead>
+          <%= link_to '+ Add new Post', new_user_post_path(current_user), class: "btn btn-primary btn-xs pull-right" %>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+          <% @posts.each_with_index do |post, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= link_to "#{post.title}", post_path(post) %></td>
+              <% if post.status == 0 %>
+                <td><span class="label label-warning">Pending</span></td>
+              <% elsif post.status == 1 %>
+                <td><span class="label label-success">Active</span></td>
+              <% else %>
+                <td><span class="label label-success">Pending</span></td>
+              <% end %>
+              <% if current_user.client? && current_user.admin? %>
+                <td class="text-center">
+                  <%= link_to 'Approve', "#", onclick: "action_post(this)",remote: true, class: "btn-approve btn btn-primary btn-xs", id: "approve_#{post.id}" %>
+                  <%= link_to 'Reject', "#", onclick: "action_post(this)", remote: true, data: { confirm: 'Are you sure?' },
+                    class: "btn-reject btn btn-danger btn-xs", id: "reject_#{post.id}" %>
+                </td>
+              <% else %>
+                <td class="text-center">
+                  <%= link_to 'Show', post_path(post), class: "btn btn-primary btn-xs" %>
+                  <%= link_to 'Edit', edit_post_path(post), class: "btn btn-info btn-xs" %>
+                  <%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' },
+                    class: "btn btn-danger btn-xs" %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

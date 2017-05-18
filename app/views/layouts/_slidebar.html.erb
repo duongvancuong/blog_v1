@@ -2,7 +2,7 @@
 <div id="sidebar">
 
   <!-- Logo -->
-    <h1 id="logo"><a href="#">STRIPED</a></h1>
+    <h1 id="logo"><%= link_to "STRIPED", root_path %></h1>
 
   <!-- Nav -->
     <nav id="nav">
@@ -11,6 +11,13 @@
         <li><a href="#">Archives</a></li>
         <li><a href="#">About Me</a></li>
         <li><a href="#">Contact Me</a></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to "Management Posts", user_posts_path(current_user) %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+        <% end %>
       </ul>
     </nav>
 
